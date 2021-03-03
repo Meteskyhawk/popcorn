@@ -8,7 +8,7 @@ import 'package:popcorn/loadData.dart';
 
 
 Future<LoadData> apiCall() async{
-  final response = await http.get("http://www.omdbapi.com/?t=as");
+  final response = await http.get("http://www.omdbapi.com/?apikey=9f2b5808&t=as");
   if (response==200){
     return LoadData.fromJson(json.decode(response.body));
   }else{
