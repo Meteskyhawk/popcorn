@@ -133,8 +133,8 @@ class _TinderswiperState extends State<Tinderswiper>
                   builder: (context,snapshot){
                     if(snapshot.hasData){
                       return Container(child: Center(
-                        child: Image.asset(
-                          '${snapshot.data.poster}',
+                        child: Image.network(
+                        '${snapshot.data.poster}',
                           fit: BoxFit.fill,
                         ),
                       ),
