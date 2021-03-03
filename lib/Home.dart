@@ -1,6 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:http/http.dart' as http;
+import 'package:popcorn/loadData.dart';
+
+
+Future<LoadData> apiCall() async{
+  final response = await http.get("http://www.omdbapi.com/?t=as");
+  if (response==200){
+    return LoadData.fromJson(json.decode(response.body));
+  }else{
+    throw Exception('Bir Hata Meydan Geldi');
+  }
+}
+
 
 class Home extends StatelessWidget {
   @override
@@ -38,6 +53,7 @@ class _TinderswiperState extends State<Tinderswiper>
     "assets/images/4.jpg",
     "assets/images/5.jpg",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
