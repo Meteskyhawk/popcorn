@@ -42,7 +42,7 @@ class LoadData{
       country: json['Country'],
       awards: json['Awards'],
       poster: json['Poster'],
-      ratings: json['Ratings'],
+    //  ratings: json['Ratings'],
       metascore: json['Metascore'],
       imdbrating: json['imdbRating'],
       imdbvotes: json['imdbVotes'],
