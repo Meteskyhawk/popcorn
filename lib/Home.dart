@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +9,32 @@ import 'package:popcorn/loadData.dart';
 
 
 Future<LoadData> apiCall() async{
-  final response = await http.get("https://www.omdbapi.com/?apikey=9f2b5808&t=as");
-  if (response.statusCode==200){
-    return LoadData.fromJson(json.decode(response.body));
-  }else{
-    throw Exception('Bir Hata Meydan Geldi');
+  int kosul=0;
+  int rand;
+  int kosul1=0;
+  var rng = new Random();
+  while(kosul==0){
+    while(kosul1==0){
+      rand = rng.nextInt(9999999);
+      await Future.delayed(Duration(seconds: 1));
+      if (rand>=1000000){
+        kosul1=1;
+      }
+      else{
+
+      }
+    }
+    final response = await http.get("https://www.omdbapi.com/?apikey=9f2b5808&i=tt${rng.nextInt(9999999)}");
+    await Future.delayed(Duration(seconds: 1));
+    if (response.statusCode==200){
+      kosul=1;
+      return LoadData.fromJson(json.decode(response.body));
+    }
+    else{
+
+    }
   }
+
 }
 /*
 class ImdbPage extends StatefulWidget{
