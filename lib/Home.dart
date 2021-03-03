@@ -16,6 +16,34 @@ Future<LoadData> apiCall() async{
   }
 }
 
+class ImdbPage extends StatefulWidget{
+  ImdbPage({Key key, this.title}):super(key: key);
+  final String title;
+
+ _ImdbPageState createState() =>_ImdbPageState();
+}
+class _ImdbPageState extends State<ImdbPage>{
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: FutureBuilder<LoadData>(
+        future: apiCall(),
+        builder: (context,snapshot){
+          if(snapshot.hasData){
+          return Container(child: Center(
+            child: Text(
+              snapshot.data.title
+            ),
+          ),
+          );
+          }else{
+            return Center(child:CircularProgressIndicator());
+          }
+        },
+      ),
+    );
+  }
+}
+
 
 class Home extends StatelessWidget {
   @override
@@ -26,7 +54,7 @@ class Home extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: Tinderswiper(),
+      home: ImdbPage(),
     );
   }
 }
