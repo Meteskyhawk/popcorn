@@ -11,12 +11,12 @@ import 'package:popcorn/loadData.dart';
 Future<LoadData> apiCall() async{
   int kosul=0;
   int rand;
-  int kosul1=0;
+
   var rng = new Random();
   while(kosul==0){
+    int kosul1=0;
     while(kosul1==0){
       rand = rng.nextInt(9999999);
-      await Future.delayed(Duration(seconds: 1));
       if (rand>=1000000){
         kosul1=1;
       }
@@ -24,8 +24,8 @@ Future<LoadData> apiCall() async{
 
       }
     }
-    final response = await http.get("https://www.omdbapi.com/?apikey=9f2b5808&i=tt${rng.nextInt(9999999)}");
-    await Future.delayed(Duration(seconds: 1));
+    print(rand);
+    final response = await http.get("https://www.omdbapi.com/?apikey=59fc1d59&i=tt${rand}");
     if (response.statusCode==200){
       kosul=1;
       return LoadData.fromJson(json.decode(response.body));
