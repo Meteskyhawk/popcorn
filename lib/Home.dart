@@ -15,7 +15,7 @@ Future<LoadData> apiCall() async{
     throw Exception('Bir Hata Meydan Geldi');
   }
 }
-
+/*
 class ImdbPage extends StatefulWidget{
   ImdbPage({Key key, this.title}):super(key: key);
   final String title;
@@ -43,7 +43,7 @@ class _ImdbPageState extends State<ImdbPage>{
     );
   }
 }
-
+*/
 
 class Home extends StatelessWidget {
   @override
