@@ -54,7 +54,7 @@ class Home extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: ImdbPage(),
+      home: Tinderswiper(),
     );
   }
 }
@@ -128,9 +128,21 @@ class _TinderswiperState extends State<Tinderswiper>
             cardBuilder: (context, index) => Card(
               child: Padding(
                 padding: EdgeInsets.all(55.0),
-                child: Image.asset(
-                  '${tinderimages[index]}',
-                  fit: BoxFit.fill,
+                child: FutureBuilder<LoadData>(
+                  future: apiCall(),
+                  builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return Container(child: Center(
+                        child: Image.asset(
+                          '${snapshot.data.poster}',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      );
+                    }else{
+                      return Center(child:CircularProgressIndicator());
+                    }
+                  },
                 ),
               ),
               elevation: 10.0,
