@@ -87,13 +87,7 @@ class _TinderswiperState extends State<Tinderswiper>
     });
   }
 
-  List<String> tinderimages = [
-    "assets/images/1.jpeg",
-    "assets/images/2.jpg",
-    "assets/images/3.jpg",
-    "assets/images/4.jpg",
-    "assets/images/5.jpg",
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -132,8 +126,8 @@ class _TinderswiperState extends State<Tinderswiper>
           height: MediaQuery.of(context).size.height * 0.6,
           child: TinderSwapCard(
             orientation: AmassOrientation.TOP,
-            totalNum: 4,
-            stackNum: 3,
+            totalNum: 99999,
+            stackNum: 1,
             maxWidth: MediaQuery.of(context).size.width * 0.9,
             maxHeight: MediaQuery.of(context).size.width * 0.9,
             minWidth: MediaQuery.of(context).size.width * 0.8,
