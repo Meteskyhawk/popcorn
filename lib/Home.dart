@@ -7,26 +7,29 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:http/http.dart' as http;
 import 'package:popcorn/loadData.dart';
 import 'package:popcorn/loadDataV2.dart';
-
-
-Future<LoadDataV2> apiCall() async{
-  int kosul=0;
+int sayac=0;
+Future<LoadDataV2> apiCall() async {
   int rand;
-
-  var rng = new Random();
-  while(kosul==0){
-    rand = rng.nextInt(9999999);
-    print(rand);
-    final response = await http.get("https://api.themoviedb.org/3/movie/${rand}?api_key=df3c4f9f765b525413d4a0ff4705b9b1");
-    if (response.statusCode==200){
-      kosul=1;
+  print('x1: ${sayac}');
+  if (sayac%3 ==0){
+    print('x: ${sayac}');
+    var rng = new Random();
+    rand = rng.nextInt(9999);
+    print('random: ${rand}');
+    final response = await http.get(
+        "https://api.themoviedb.org/3/movie/${rand}?api_key=df3c4f9f765b525413d4a0ff4705b9b1");
+    if (response.statusCode == 200) {
+      sayac++;
       return LoadDataV2.fromJson(json.decode(response.body));
-    }
-    else{
+    } else {
+
 
     }
-  }
 
+  }else{
+  sayac++;
+
+}
 }
 /*
 class ImdbPage extends StatefulWidget{
@@ -87,8 +90,6 @@ class _TinderswiperState extends State<Tinderswiper>
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +128,7 @@ class _TinderswiperState extends State<Tinderswiper>
           child: TinderSwapCard(
             orientation: AmassOrientation.TOP,
             totalNum: 99999,
-            stackNum: 1,
+            stackNum: 2,
             maxWidth: MediaQuery.of(context).size.width * 0.9,
             maxHeight: MediaQuery.of(context).size.width * 0.9,
             minWidth: MediaQuery.of(context).size.width * 0.8,
@@ -137,17 +138,19 @@ class _TinderswiperState extends State<Tinderswiper>
                 padding: EdgeInsets.all(55.0),
                 child: FutureBuilder<LoadDataV2>(
                   future: apiCall(),
-                  builder: (context,snapshot){
-                    if(snapshot.hasData){
-                      return Container(child: Center(
-                        child: Image.network(
-                        'https://image.tmdb.org/t/p/w500/${snapshot.data.poster_path}',
-                          fit: BoxFit.fill,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Container(
+                        child: Center(
+                          child: Image.network(
+                            'https://image.tmdb.org/t/p/w500${snapshot.data.poster_path}',
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
                       );
-                    }else{
-                      return Center(child:CircularProgressIndicator());
+                    } else {
+
+                      return Center(child: CircularProgressIndicator());
                     }
                   },
                 ),
