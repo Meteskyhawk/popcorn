@@ -7,11 +7,13 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:http/http.dart' as http;
 import 'package:popcorn/loadData.dart';
 import 'package:popcorn/loadDataV2.dart';
-int sayac=0;
+import 'package:flutter_swiper/flutter_swiper.dart';
+
+int sayac = 0;
 Future<LoadDataV2> apiCall() async {
   int rand;
   print('x1: ${sayac}');
-  if (sayac%3 ==0){
+  if (sayac % 3 == 0) {
     print('x: ${sayac}');
     var rng = new Random();
     rand = rng.nextInt(9999);
@@ -21,15 +23,10 @@ Future<LoadDataV2> apiCall() async {
     if (response.statusCode == 200) {
       sayac++;
       return LoadDataV2.fromJson(json.decode(response.body));
-    } else {
-
-
-    }
-
-  }else{
-  sayac++;
-
-}
+    } else {}
+  } else {
+    sayac++;
+  }
 }
 /*
 class ImdbPage extends StatefulWidget{
@@ -60,7 +57,6 @@ class _ImdbPageState extends State<ImdbPage>{
   }
 }
 */
-
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -70,17 +66,15 @@ class Home extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: Tinderswiper(),
+      home: Flutter_Swiper(),
     );
   }
 }
-
-class Tinderswiper extends StatefulWidget {
+class Flutter_Swiper extends StatefulWidget {
   @override
-  _TinderswiperState createState() => _TinderswiperState();
+  _Flutter_SwiperState createState() => _Flutter_SwiperState();
 }
-
-class _TinderswiperState extends State<Tinderswiper>
+class _Flutter_SwiperState extends State<Flutter_Swiper>
     with TickerProviderStateMixin {
   int _selectedIndex = 0;
 
@@ -89,7 +83,6 @@ class _TinderswiperState extends State<Tinderswiper>
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,42 +116,37 @@ class _TinderswiperState extends State<Tinderswiper>
         onTap: _onItemTapped,
       ),
       body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.6,
-          child: TinderSwapCard(
-            orientation: AmassOrientation.TOP,
-            totalNum: 99999,
-            stackNum: 2,
-            maxWidth: MediaQuery.of(context).size.width * 0.9,
-            maxHeight: MediaQuery.of(context).size.width * 0.9,
-            minWidth: MediaQuery.of(context).size.width * 0.8,
-            minHeight: MediaQuery.of(context).size.width * 0.8,
-            cardBuilder: (context, index) => Card(
-              child: Padding(
-                padding: EdgeInsets.all(55.0),
-                child: FutureBuilder<LoadDataV2>(
-                  future: apiCall(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        child: Center(
-                          child: Image.network(
-                            'https://image.tmdb.org/t/p/w500${snapshot.data.poster_path}',
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      );
-                    } else {
 
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  },
+        child: Container(
+          child: Padding(
+              padding: EdgeInsets.all(55.0),
+              child: Swiper(
+                itemCount: 10,
+                itemBuilder: (BuildContext context, int index) => Card(
+                  child: FutureBuilder<LoadDataV2>(
+                    future: apiCall(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Container(
+                          child: Center(
+                            child: Image.network(
+                              'https://image.tmdb.org/t/p/w500${snapshot.data.poster_path}',
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        );
+                      } else {
+
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
                 ),
-              ),
-              elevation: 10.0,
-            ),
-          ),
+
+
+              )),
         ),
+
       ),
     );
   }

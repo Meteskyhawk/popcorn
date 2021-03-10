@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "41264262843",
+    "project_id": "popcorn-fdbb7",
+    "storage_bucket": "popcorn-fdbb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41264262843:android:fa216a6eb2d891e7f3c39e",
+        "android_client_info": {
+          "package_name": "com.example.popcorn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41264262843-m1amoq3epp110jprl4tk304fjli491v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPAEwj2jqTSP3EIdkaRhuJYF6dtRF03AU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41264262843-m1amoq3epp110jprl4tk304fjli491v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

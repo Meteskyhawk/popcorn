@@ -27,7 +27,9 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_signin_button: ^1.1.0
   flutter_tindercard: ^0.1.8
+  flutter_swiper: ^1.1.6
   http: ^0.12.2
+  flutter_facebook_login: ^3.0.0
 
 dev_dependencies:
   flutter_test:

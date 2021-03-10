@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'Home.dart';
 
 class Login extends StatelessWidget {
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +39,37 @@ class Login extends StatelessWidget {
               SizedBox(
                 height: 5.0,
               ),
-              SignInButton(
-                Buttons.Facebook,
-                onPressed: () => Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => Home()),
-                ),
+              FlatButton(child: Text("login",style: TextStyle(color: Colors.white),),onPressed: () async {
+                             final FacebookLoginResult result =
+                             await facebookSignIn.logIn(['email']);
+                             switch (result.status) {
+                             case FacebookLoginStatus.loggedIn:
+                             final FacebookAccessToken accessToken = result.accessToken;
+             print('''
+               Logged in!
+
+                Token: ${accessToken.token}
+                User id: ${accessToken.userId}
+                Expires: ${accessToken.expires}
+         Permissions: ${accessToken.permissions}
+         Declined permissions: ${accessToken.declinedPermissions}
+         ''');
+    break;
+    case FacebookLoginStatus.cancelledByUser:
+    print('Login cancelled by the user.');
+    break;
+    case FacebookLoginStatus.error:
+    print('Something went wrong with the login process.\n'
+    'Here\'s the error Facebook gave us: ${result.errorMessage}');
+    break;
+
+    }
+              },
+              )
+                ],
+                )
               ),
-            ],
           ),
-        ),
-      ),
     );
   }
 }
