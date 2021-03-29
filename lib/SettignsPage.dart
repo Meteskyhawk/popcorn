@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:popcorn/Home.dart';
 
-
-
 class SettingsPage extends StatelessWidget {
    final TextStyle whiteText = TextStyle(
     color: Colors.black,
