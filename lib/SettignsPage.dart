@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:popcorn/Home.dart';
 
 class SettingsPage extends StatelessWidget {
-   final TextStyle whiteText = TextStyle(
+  final TextStyle whiteText = TextStyle(
     color: Colors.black,
   );
   final TextStyle greyTExt = TextStyle(
@@ -26,25 +26,26 @@ class SettingsPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 30.0),
-
                 Row(
                   children: <Widget>[
-                  IconButton(
-                  icon: new Icon(Icons.arrow_back),
-                  color: Colors.black,
-                  onPressed: () { Navigator.push (context,
-                  MaterialPageRoute(builder: (context) => Home()));
-                  },
-              ),
+                    IconButton(
+                      icon: new Icon(Icons.arrow_back),
+                      color: Colors.black,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Home()));
+                      },
+                    ),
                     Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
                         color: Colors.black87,
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                        image: NetworkImage('https://i.ibb.co/vcs5cwQ/2843832.jpg'),
-                        fit: BoxFit.cover,
+                          image: NetworkImage(
+                              'https://i.ibb.co/vcs5cwQ/2843832.jpg'),
+                          fit: BoxFit.cover,
                         ),
                         border: Border.all(
                           color: Colors.black,
@@ -83,7 +84,7 @@ class SettingsPage extends StatelessWidget {
                   subtitle: Text(
                     "English UK",
                     style: greyTExt,
-                  ),  
+                  ),
                   trailing: Icon(
                     Icons.keyboard_arrow_right,
                     color: Colors.black,
@@ -107,7 +108,6 @@ class SettingsPage extends StatelessWidget {
                 SwitchListTile(
                   title: Text(
                     "Email Notifications",
-
                   ),
                   subtitle: Text(
                     "On",
@@ -119,7 +119,6 @@ class SettingsPage extends StatelessWidget {
                 SwitchListTile(
                   title: Text(
                     "Push Notifications",
-
                   ),
                   subtitle: Text(
                     "Off",
@@ -132,16 +131,13 @@ class SettingsPage extends StatelessWidget {
                   title: Text(
                     "Logout",
                   ),
-                  onTap: () => {
-
-                  },
+                  onTap: () => {},
                 ),
               ],
             ),
           ),
         ),
       ),
-
     );
   }
 }
