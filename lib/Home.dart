@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 import 'package:http/http.dart' as http;
+import 'package:popcorn/Profile.dart';
+import 'package:popcorn/SettignsPage.dart';
 import 'package:popcorn/loadData.dart';
 import 'package:popcorn/loadDataV2.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:popcorn/main.dart';
 
 int sayac = 0;
 Future<LoadDataV2> apiCall() async {
@@ -28,6 +30,7 @@ Future<LoadDataV2> apiCall() async {
     sayac++;
   }
 }
+
 /*
 class ImdbPage extends StatefulWidget{
   ImdbPage({Key key, this.title}):super(key: key);
@@ -64,16 +67,18 @@ class Home extends StatelessWidget {
       title: "Popcorn",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.amber.shade400,
       ),
       home: Flutter_Swiper(),
     );
   }
 }
+
 class Flutter_Swiper extends StatefulWidget {
   @override
   _Flutter_SwiperState createState() => _Flutter_SwiperState();
 }
+
 class _Flutter_SwiperState extends State<Flutter_Swiper>
     with TickerProviderStateMixin {
   int _selectedIndex = 0;
@@ -83,22 +88,29 @@ class _Flutter_SwiperState extends State<Flutter_Swiper>
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Popcorn"),
         actions: <Widget>[
-          Icon(
-            Icons.account_circle,
-            size: 55.0,
+          IconButton(
+            icon: const Icon(Icons.settings),
+            color: Colors.black87,
+            onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => SettingsPage())),
           ),
-          Icon(
-            Icons.menu,
-            size: 55.0,
+          SizedBox(height: 6.0),
+          IconButton(
+            icon: new Icon(Icons.account_box_sharp),
+            color: Colors.black,
+            onPressed: () { Navigator.push (context,
+                MaterialPageRoute(builder: (context) => Profile()));
+            },
           ),
         ],
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.amber,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -116,37 +128,44 @@ class _Flutter_SwiperState extends State<Flutter_Swiper>
         onTap: _onItemTapped,
       ),
       body: Center(
-
         child: Container(
           child: Padding(
-              padding: EdgeInsets.all(55.0),
-              child: Swiper(
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) => Card(
-                  child: FutureBuilder<LoadDataV2>(
-                    future: apiCall(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Container(
-                          child: Center(
-                            child: Image.network(
-                              'https://image.tmdb.org/t/p/w500${snapshot.data.poster_path}',
-                              fit: BoxFit.fill,
-                            ),
+            padding: EdgeInsets.all(55.0),
+            child: Swiper(
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index) => Card(
+                child: FutureBuilder<LoadDataV2>(
+                  future: apiCall(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(children: <Widget>[
+                        Center(
+                          child: Text(
+                         '\n${snapshot.data.title}'
+                         '\nPopularity: ${snapshot.data.popularity}'
+                         '\nGenres: ${snapshot.data.genres}',
+                          style: TextStyle(fontStyle: FontStyle.italic,color: Colors.black),
                           ),
-                        );
-                      } else {
-
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
+                        ),
+                        Center(
+                          child: Image.network(
+                            'https://image.tmdb.org/t/p/w500${snapshot.data.poster_path}',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ],
+                      );
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
                 ),
-
-
-              )),
+              ),
+            ),
+          ),
         ),
-
       ),
     );
   }

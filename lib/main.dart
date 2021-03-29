@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:popcorn/Home.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +17,6 @@ class MyApp extends StatefulWidget {
     return _MyAppState();
   }
 }
-
 class _MyAppState extends State<MyApp> {
   bool _isLoggedIn = true;
   Map userProfile;
@@ -44,20 +45,17 @@ class _MyAppState extends State<MyApp> {
         break;
     }
   }
-
   _logout() {
     facebookLogin.logOut();
     setState(() {
       _isLoggedIn = false;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: new HomeScreen());
   }
 }
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -68,41 +66,31 @@ class HomeScreen extends StatelessWidget {
             image: DecorationImage(
                 alignment: Alignment(-.4, 0),
                 image: NetworkImage(
-                    'https://image.freepik.com/free-photo/rusty-metallic-wall-background-yellow-old-paint_23-2148742531.jpg'),
+                    'https://i.ibb.co/vcs5cwQ/2843832.jpg'),
                 fit: BoxFit.cover),
           ),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Popcorn",
-                  style: TextStyle(
-                      fontSize: 55.0,
-                      color: Colors.white,
-                      height: 5,
-                      fontStyle: FontStyle.italic),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                Text("Popcorn",
+            style: TextStyle(fontSize: 40, color: Colors.red,fontFamily: 'Roboto'),
+            strutStyle: StrutStyle(fontSize: 13, ),
                 ),
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://image.freepik.com/free-vector/realistic-popcorn-bucket_98292-1416.jpg"),
-                  radius: 60.0,
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
+                SizedBox(height: 90.0,width: 50.0,),
                 SignInButton(
                   Buttons.Facebook,
                   onPressed: () =>
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => Home()),
-                      ),
+                ),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
+            ),
+            ),
+            ),
+            );
+
+          }
 }
