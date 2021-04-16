@@ -73,22 +73,18 @@ class Home extends StatelessWidget {
     );
   }
 }
-
 class Flutter_Swiper extends StatefulWidget {
   @override
   _Flutter_SwiperState createState() => _Flutter_SwiperState();
 }
-
 class _Flutter_SwiperState extends State<Flutter_Swiper>
     with TickerProviderStateMixin {
   int _selectedIndex = 0;
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
