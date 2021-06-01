@@ -73,7 +73,11 @@ class Home extends StatelessWidget {
     );
   }
 }
+<<<<<<< Updated upstream
 class Flutter_Swiper extends StatefulWidget {
+=======
+class Tinderswiper extends StatefulWidget {
+>>>>>>> Stashed changes
   @override
   _Flutter_SwiperState createState() => _Flutter_SwiperState();
 }
